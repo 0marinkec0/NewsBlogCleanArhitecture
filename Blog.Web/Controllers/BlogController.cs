@@ -53,7 +53,6 @@ namespace Blog.WebMVC.Controllers
 
                 return RedirectToAction("Index");
             }
-
             return View();
         }
 
@@ -63,7 +62,13 @@ namespace Blog.WebMVC.Controllers
              _articleRepository.deleteArticle(model);
             await _articleRepository.save();
             return RedirectToAction(nameof(Index));
-            // return RedirectToAction("Index", model);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var modelById =  await _articleRepository.getArticleById(id);
+             _articleRepository.updateArticle(modelById);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Logout()

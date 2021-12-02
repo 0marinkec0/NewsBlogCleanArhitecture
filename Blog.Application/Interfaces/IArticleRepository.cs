@@ -11,7 +11,7 @@ namespace Blog.Application.Interfaces
     {
         Task createArticle(Article article);
         void deleteArticle(Article article);
-        Task updateArticle(Article article, int id);
+        void updateArticle(Article article);
 
         Task<List<Article>> getAllArticle();
         Task<Article> getArticleById(int id);

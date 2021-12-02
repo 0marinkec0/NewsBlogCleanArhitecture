@@ -44,13 +44,9 @@ namespace Blog.Application.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task updateArticle(Article article, int id)
+        public void updateArticle(Article article)
         {
-            var articl = await _dbContext.Articles.FirstOrDefaultAsync(x => x.Id == id);
-
-            article.Title = articl.Content;
-            article.Content = articl.Content;
-
+           _dbContext.Entry(article).State = EntityState.Modified;
         }
     }
 }
