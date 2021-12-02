@@ -66,8 +66,19 @@ namespace Blog.WebMVC.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var modelById =  await _articleRepository.getArticleById(id);
-             _articleRepository.updateArticle(modelById);
+            if (id > 0) 
+            {
+                var modelById = await _articleRepository.getArticleById(id);
+                return View(modelById);
+            }
+            return BadRequest();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(Article article)
+        {
+            _articleRepository.updateArticle(article);
+            await _articleRepository.save();
             return RedirectToAction(nameof(Index));
         }
 
